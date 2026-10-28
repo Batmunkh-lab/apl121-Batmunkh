@@ -4,9 +4,9 @@
         <attribute name="name" value="quest"/>
         <attribute name="authors" value="Lenovo"/>
         <attribute name="about" value=""/>
-        <attribute name="saved" value="2026-10-28 07:59:12 PM"/>
+        <attribute name="saved" value="2026-10-28 09:09:14 PM"/>
         <attribute name="created" value="TGVub3ZvO0RFU0tUT1AtVVU4RTA3VjsyMDI2LTEwLTI4OzA3OjIwOjQ3IFBNOzI5Nzk="/>
-        <attribute name="edited" value="TGVub3ZvO0RFU0tUT1AtVVU4RTA3VjsyMDI2LTEwLTI4OzA3OjU5OjEyIFBNOzE1OzMxNDQ="/>
+        <attribute name="edited" value="TGVub3ZvO0RFU0tUT1AtVVU4RTA3VjsyMDI2LTEwLTI4OzA5OjA5OjE0IFBNOzE3OzMxNDU="/>
     </attributes>
     <function name="Main" type="None" variable="">
         <parameters/>
@@ -62,7 +62,7 @@
                 <assign variable="scaled" expression="cumulative"/>
                 <assign variable="allocated" expression="Int(scaled * fee / total)"/>
                 <assign variable="service[i]" expression="allocated - previous"/>
-                <assign variable="pay[i]" expression="order[i] + service[i]"/>
+                <assign variable="pay[i]" expression="CalculatePay(order[i], service[i])"/>
                 <assign variable="previous" expression="allocated"/>
                 <assign variable="used[i]" expression="0"/>
             </for>
@@ -97,6 +97,16 @@
                 <assign variable="used[best]" expression="1"/>
                 <output expression="rank &amp; &quot;-&#1088; &#1073;&#1072;&#1081;&#1088; | &#1061;&#1199;&#1085; &quot; &amp; (best + 1) &amp; &quot; | &quot; &amp; pay[best] &amp; &quot; &#1090;&#1257;&#1075;&#1088;&#1257;&#1075;&quot;" newline="True"/>
             </for>
+        </body>
+    </function>
+    <function name="CalculatePay" type="Integer" variable="result">
+        <parameters>
+            <parameter name="amount" type="Integer" array="False"/>
+            <parameter name="charge" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="result" type="Integer" array="False" size=""/>
+            <assign variable="result" expression="amount + charge"/>
         </body>
     </function>
 </flowgorithm>

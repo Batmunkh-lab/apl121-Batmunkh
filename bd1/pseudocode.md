@@ -32,7 +32,7 @@
    cumulative = cumulative + order[i]
    allocated = бүхэл_хэсэг(cumulative × fee / total)
    service[i] = allocated - previous
-   pay[i] = order[i] + service[i]
+   pay[i] = CalculatePay(order[i], service[i])
    previous = allocated
    used[i] = 0
 
@@ -52,3 +52,6 @@
    Байр, хүний дугаар, төлөх дүнг хэвлэнэ.
 
 ДУУСАХ
+ФУНКЦ CalculatePay(amount, charge):
+    result = amount + charge
+    result-ийг буцаана.
