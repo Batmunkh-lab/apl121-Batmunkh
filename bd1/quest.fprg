@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="quest"/>
+        <attribute name="authors" value="Lenovo"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-28 07:59:12 PM"/>
+        <attribute name="created" value="TGVub3ZvO0RFU0tUT1AtVVU4RTA3VjsyMDI2LTEwLTI4OzA3OjIwOjQ3IFBNOzI5Nzk="/>
+        <attribute name="edited" value="TGVub3ZvO0RFU0tUT1AtVVU4RTA3VjsyMDI2LTEwLTI4OzA3OjU5OjEyIFBNOzE1OzMxNDQ="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n, total, fee" type="Integer" array="False" size=""/>
+            <declare name="sum, cumulative, previous, allocated, i, rank, best" type="Integer" array="False" size=""/>
+            <declare name="scaled" type="Real" array="False" size=""/>
+            <declare name="order" type="Integer" array="True" size="20"/>
+            <declare name="service" type="Integer" array="True" size="20"/>
+            <declare name="pay" type="Integer" array="True" size="20"/>
+            <declare name="used" type="Integer" array="True" size="20"/>
+            <do expression="n &lt; 5 or n &gt; 20">
+                <output expression="&quot;&#1061;&#1199;&#1085;&#1080;&#1081; &#1090;&#1086;&#1086;&#1075; &#1086;&#1088;&#1091;&#1091;&#1083;&#1085;&#1072; &#1091;&#1091; (5-20):&quot;" newline="True"/>
+                <input variable="n"/>
+            </do>
+            <do expression="total &lt; 1 or total &gt; 1000000">
+                <output expression="&quot;&#1061;&#1086;&#1086;&#1083;&#1085;&#1099; &#1085;&#1080;&#1081;&#1090; &#1199;&#1085;&#1080;&#1081;&#1075; &#1086;&#1088;&#1091;&#1091;&#1083;&#1085;&#1072; &#1091;&#1091; (1-1000000):&quot;" newline="True"/>
+                <input variable="total"/>
+            </do>
+            <do expression="fee &lt; 0 or fee &gt; 100000">
+                <output expression="&quot;&#1198;&#1081;&#1083;&#1095;&#1080;&#1083;&#1075;&#1101;&#1101;&#1085;&#1080;&#1081; &#1093;&#1091;&#1088;&#1072;&#1072;&#1084;&#1078;&#1080;&#1081;&#1075; &#1086;&#1088;&#1091;&#1091;&#1083;&#1085;&#1072; &#1091;&#1091; (0-100000):&quot;" newline="True"/>
+                <input variable="fee"/>
+            </do>
+            <do expression="sum &lt; total or sum &gt; total">
+                <assign variable="sum" expression="0"/>
+                <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                    <output expression="&quot;&#1061;&#1199;&#1085; &quot; &amp; (i + 1) &amp; &quot;-&#1080;&#1081;&#1085; &#1079;&#1072;&#1093;&#1080;&#1072;&#1083;&#1075;&#1099;&#1085; &#1199;&#1085;&#1101;:&quot;" newline="True"/>
+                    <do expression="order[i] &lt; 0 or order[i] &gt; total">
+                        <input variable="order[i]"/>
+                    </do>
+                    <assign variable="sum" expression="sum + order[i]"/>
+                </for>
+                <if expression="sum &lt; total">
+                    <then>
+                        <output expression="&quot;&#1047;&#1072;&#1093;&#1080;&#1072;&#1083;&#1075;&#1099;&#1085; &#1085;&#1080;&#1081;&#1083;&#1073;&#1101;&#1088; &#1085;&#1080;&#1081;&#1090; &#1199;&#1085;&#1101;&#1101;&#1089; &#1073;&#1072;&#1075;&#1072; &#1073;&#1072;&#1081;&#1085;&#1072;. &#1041;&#1199;&#1093; &#1079;&#1072;&#1093;&#1080;&#1072;&#1083;&#1075;&#1099;&#1075; &#1076;&#1072;&#1093;&#1080;&#1085; &#1086;&#1088;&#1091;&#1091;&#1083;&#1085;&#1072; &#1091;&#1091;.&quot;" newline="True"/>
+                    </then>
+                    <else>
+                        <if expression="sum &gt; total">
+                            <then>
+                                <output expression="&quot;&#1047;&#1072;&#1093;&#1080;&#1072;&#1083;&#1075;&#1099;&#1085; &#1085;&#1080;&#1081;&#1083;&#1073;&#1101;&#1088; &#1085;&#1080;&#1081;&#1090; &#1199;&#1085;&#1101;&#1101;&#1089; &#1080;&#1093; &#1073;&#1072;&#1081;&#1085;&#1072;. &#1041;&#1199;&#1093; &#1079;&#1072;&#1093;&#1080;&#1072;&#1083;&#1075;&#1099;&#1075; &#1076;&#1072;&#1093;&#1080;&#1085; &#1086;&#1088;&#1091;&#1091;&#1083;&#1085;&#1072; &#1091;&#1091;.&quot;" newline="True"/>
+                            </then>
+                            <else>
+                                <output expression="&quot;&#1047;&#1072;&#1093;&#1080;&#1072;&#1083;&#1075;&#1099;&#1085; &#1085;&#1080;&#1081;&#1083;&#1073;&#1101;&#1088; &#1085;&#1080;&#1081;&#1090; &#1199;&#1085;&#1101;&#1090;&#1101;&#1081; &#1090;&#1072;&#1072;&#1088;&#1083;&#1072;&#1072;.&quot;" newline="True"/>
+                            </else>
+                        </if>
+                    </else>
+                </if>
+            </do>
+            <assign variable="cumulative" expression="0"/>
+            <assign variable="previous" expression="0"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="cumulative" expression="cumulative + order[i]"/>
+                <assign variable="scaled" expression="cumulative"/>
+                <assign variable="allocated" expression="Int(scaled * fee / total)"/>
+                <assign variable="service[i]" expression="allocated - previous"/>
+                <assign variable="pay[i]" expression="order[i] + service[i]"/>
+                <assign variable="previous" expression="allocated"/>
+                <assign variable="used[i]" expression="0"/>
+            </for>
+            <output expression="&quot;&#1061;&#1199;&#1085; | &#1047;&#1072;&#1093;&#1080;&#1072;&#1083;&#1075;&#1072; | &#1198;&#1081;&#1083;&#1095;&#1080;&#1083;&#1075;&#1101;&#1101; | &#1058;&#1257;&#1083;&#1257;&#1093; &#1076;&#1199;&#1085;&quot;" newline="True"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="(i + 1) &amp; &quot; | &quot; &amp; order[i] &amp; &quot; | &quot; &amp; service[i] &amp; &quot; | &quot; &amp; pay[i]" newline="True"/>
+            </for>
+            <output expression="&quot;&#1053;&#1048;&#1049;&#1058; | &quot; &amp; total &amp; &quot; | &quot; &amp; fee &amp; &quot; | &quot; &amp; (total + fee)" newline="True"/>
+            <output expression="&quot;&#1061;&#1072;&#1084;&#1075;&#1080;&#1081;&#1085; &#1080;&#1093; &#1090;&#1257;&#1083;&#1257;&#1093; 3 &#1093;&#1199;&#1085;:&quot;" newline="True"/>
+            <for variable="rank" start="1" end="3" direction="inc" step="1">
+                <assign variable="best" expression="-1"/>
+                <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                    <if expression="used[i] = 0">
+                        <then>
+                            <if expression="best = -1">
+                                <then>
+                                    <assign variable="best" expression="i"/>
+                                </then>
+                                <else>
+                                    <if expression="pay[i] &gt; pay[best]">
+                                        <then>
+                                            <assign variable="best" expression="i"/>
+                                        </then>
+                                        <else/>
+                                    </if>
+                                </else>
+                            </if>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+                <assign variable="used[best]" expression="1"/>
+                <output expression="rank &amp; &quot;-&#1088; &#1073;&#1072;&#1081;&#1088; | &#1061;&#1199;&#1085; &quot; &amp; (best + 1) &amp; &quot; | &quot; &amp; pay[best] &amp; &quot; &#1090;&#1257;&#1075;&#1088;&#1257;&#1075;&quot;" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
